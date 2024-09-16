@@ -38,7 +38,7 @@ public class BookerTests {
     }
 
 
-    @Test
+    @Test(groups = "testGroup", priority = 1)
     public void testPOSTCreateBooking() {
         // Використання RandomDateGenerator для створення випадкових дат
         BookingDates randomDate = new RandomDateGenerator().generateRandomBookingDates();
@@ -65,7 +65,7 @@ public class BookerTests {
 
     }
 
-    @Test
+    @Test(groups = "testGroup", priority = 2)
     public void testGETBookingIds() {
         // Відправка GET запиту
         Response response = RestAssured.get("/booking")
@@ -116,7 +116,7 @@ public class BookerTests {
     }
 
     @Test(dependsOnMethods = "testGETBookingIds")
-    public void testPUTChangeParams()throws Exception {
+    public void testPUTChangeParams() {
         // Створення копій body для порівняня змін
         Response getResponse = RestAssured.get("/booking/{id}", id2);
         Map<String, Object> oldBody = getResponse.jsonPath().getMap("");
