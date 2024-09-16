@@ -26,7 +26,7 @@ public class BookerTests {
     int id1;
     int id2;
 
-    @BeforeMethod
+    @BeforeMethod(groups = "testGroup")
     public void setup() {
         RestAssured.baseURI = "https://restful-booker.herokuapp.com";
         RestAssured.requestSpecification = new RequestSpecBuilder()
@@ -41,8 +41,9 @@ public class BookerTests {
     @Test(groups = "testGroup", priority = 1)
     public void testPOSTCreateBooking() {
         // Використання RandomDateGenerator для створення випадкових дат
-        BookingDates randomDate = new RandomDateGenerator().generateRandomBookingDates();
+         BookingDates randomDate = new RandomDateGenerator().generateRandomBookingDates();
         // Створення body
+
         CreateBookingRequest body = CreateBookingRequest.builder()
                 .firstname("Tim")
                 .lastname("Brown")
@@ -57,6 +58,7 @@ public class BookerTests {
                 .when()
                 .post("/booking")
                 .then()
+                .log().all()
                 .statusCode(200)
                 .body(not(emptyOrNullString()))
                 .body("bookingid", notNullValue())
