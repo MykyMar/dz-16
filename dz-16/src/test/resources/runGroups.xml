@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="MyTestSuite2" parallel="false">
+    <test name="testGroup group">
+        <groups>
+            <run>
+                <include name="testGroup"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="Booker.BookerTests"/>
+        </classes>
+    </test>
+</suite>
